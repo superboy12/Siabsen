@@ -20,6 +20,8 @@ class AuthRepository {
         name: 'John Doe',
         email: email,
         role: 'Employee',
+        nip: '198507232010121001',
+        department: 'Biro Teknologi Informasi',
         profileImageUrl: 'https://i.pravatar.cc/150?img=11',
       );
     }

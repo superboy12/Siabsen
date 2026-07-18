@@ -3,14 +3,17 @@ import 'package:go_router/go_router.dart';
 import '../../../shared/widgets/gov_card.dart';
 import '../../../shared/widgets/primary_button.dart';
 
-class LoginScreen extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'providers/auth_provider.dart';
+
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nipController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,20 +27,28 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _handleLogin() async {
-    if (_formKey.currentState?.validate() ?? false) {
+  Future<void> _handleLogin() async {
+    if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
-      // Simulate API call
-      await Future.delayed(const Duration(seconds: 2));
+      final email = _nipController.text.trim();
+      final password = _passwordController.text;
+
+      // Call login from the provider
+      await ref.read(authProvider.notifier).login(email, password);
 
       if (mounted) {
         setState(() {
           _isLoading = false;
         });
-        context.go('/dashboard');
+        
+        if (email == 'admin@demo.com') {
+          context.go('/admin');
+        } else {
+          context.go('/dashboard');
+        }
       }
     }
   }

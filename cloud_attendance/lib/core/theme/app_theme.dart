@@ -39,9 +39,9 @@ class AppTheme {
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
           textStyle: GoogleFonts.inter(
             fontSize: 16,
@@ -65,11 +65,11 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: AppColors.surface,
-        elevation: 1,
-        shadowColor: Colors.black12,
+        elevation: 4,
+        shadowColor: Colors.black.withOpacity(0.05),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(color: AppColors.border, width: 1),
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: AppColors.border, width: 0.5),
         ),
         margin: EdgeInsets.zero,
       ),
